@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>SCSS Animation Mixin</title>
+  <link rel='stylesheet prefetch' href='http://brandonbrule.com/css/style.css'>
+  <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+</head>
+<body>
+
+<header>
+  <h1>SCSS Animation Mixin - children</h1>
+  <h2>Cross Browser Animation Keyframe and Animation</h2>
+</header>
+
+<div class="container">
+  <div id="example" class="box animation-slide-in-right"></div>
+</div>
+<button class="example-button" data-animation="animation-slide-out-up">Slide Out Up</button>
+<button class="example-button" data-animation="animation-slide-in-up">Slide In Up</button>
+
+<button class="example-button" data-animation="animation-slide-out-down">Slide Out Down</button>
+<button class="example-button" data-animation="animation-slide-in-down">Slide In Down</button>
+
+<button class="example-button" data-animation="animation-slide-out-left">Slide Out Left</button>
+<button class="example-button" data-animation="animation-slide-in-right">Slide In Right</button>
+
+<button class="example-button" data-animation="animation-slide-out-right">Slide Out Right</button>
+<button class="example-button" data-animation="animation-slide-in-left">Slide In Left</button>
+<hr>
+<h3>Usage</h3>
+<pre class="prettyprint">
+// HTML
+&#x3C;div class=&#x22;animation-slide-in-up&#x22;&#x3E;&#x3C;/div&#x3E;
+&#x3C;div class=&#x22;animation-slide-in-down&#x22;&#x3E;&#x3C;/div&#x3E;
+&#x3C;div class=&#x22;animation-slide-in-right&#x22;&#x3E;&#x3C;/div&#x3E;
+&#x3C;div class=&#x22;animation-slide-in-left&#x22;&#x3E;&#x3C;/div&#x3E;
+
+&#x3C;div class=&#x22;animation-slide-out-up&#x22;&#x3E;&#x3C;/div&#x3E;
+&#x3C;div class=&#x22;animation-slide-out-down&#x22;&#x3E;&#x3C;/div&#x3E;
+&#x3C;div class=&#x22;animation-slide-out-right&#x22;&#x3E;&#x3C;/div&#x3E;
+&#x3C;div class=&#x22;animation-slide-out-left&#x22;&#x3E;&#x3C;/div&#x3E;
+
+// CSS
+.animation-slide-in-up{
+  @include animation(0, 0.5s, animation-slide-in-up, ease);
+}
+
+.animation-slide-in-down{
+  @include animation(0, 0.5s, animation-slide-in-down, ease);
+}
+
+.animation-slide-in-right{
+  @include animation(0, 0.5s, animation-slide-in-right, ease);
+}
+
+.animation-slide-in-left{
+  @include animation(0, 0.5s, animation-slide-in-left, ease);
+}
+
+.animation-slide-out-up{
+  @include animation(0, 0.5s, animation-slide-out-up, ease);
+}
+
+.animation-slide-out-down{
+  @include animation(0, 0.5s, animation-slide-out-down, ease);
+}
+
+.animation-slide-out-right{
+  @include animation(0, 0.5s, animation-slide-out-right, ease);
+}
+
+.animation-slide-out-left{
+  @include animation(0, 0.5s, animation-slide-out-left, ease);
+}
+</pre>
+<hr>
+<h3>Mixin</h3>
+<pre class="prettyprint">
+@mixin keyframe ($animation_name) {
+    @-webkit-keyframes $animation_name {
+        @content;
+    }
+
+    @-moz-keyframes $animation_name {
+        @content;
+    }
+
+    @-o-keyframes $animation_name {
+        @content;
+    }
+
+    @keyframes $animation_name {
+        @content;
+    }
+}
+
+@mixin animation ($delay, $duration, $animation, $direction: forward, $fillmode: fowards) {
+    -webkit-animation-delay: $delay;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-name: $animation;
+    -webkit-animation-fill-mode: $fillmode;
+    -webkit-animation-direction: $direction;
+
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-name: $animation;
+    -moz-animation-fill-mode: $fillmode;
+    -moz-animation-direction: $direction;
+
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-name: $animation;
+    animation-fill-mode: $fillmode;
+    animation-direction: $direction;
+}
+</pre>
+<hr>
+<h3>Animations</h3>
+<pre class="prettyprint">
+// -- Slide Animations -- //
+
+// Slide Out Top from Center
+@include keyframe(animation-slide-out-up) {
+    0% {
+        transform: translate(0,0);
+    }
+
+    100% {
+        transform: translate(0,-100%);
+    }
+}
+
+@include keyframe(animation-slide-out-down) {
+    0% {
+        transform: translate(0,0);
+    }
+
+    100% {
+        transform: translate(0,100%);
+    }
+}
+
+// Slide Out Left from Center
+@include keyframe(animation-slide-out-left) {
+    0% {
+        transform: translate(0,0);
+    }
+
+    100% {
+        transform: translate(-100%,0);
+    }
+}
+
+// Slide out Right from Center
+@include keyframe(animation-slide-out-right) {
+    0% {
+        transform: translate(0,0);
+    }
+
+    100% {
+        transform: translate(100%,0);
+    }
+}
+
+@include keyframe(animation-slide-in-up) {
+    0% {
+        transform: translate(0,100%);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
+}
+
+@include keyframe(animation-slide-in-down) {
+    0% {
+        transform: translate(0,-100%);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
+}
+
+// Slide in Left to Center
+@include keyframe(animation-slide-in-left) {
+    0% {
+        transform: translate(-100%,0);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
+}
+
+// Slide in Right to Center
+@include keyframe(animation-slide-in-right) {
+    0% {
+        transform: translate(100%,0);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
+}
+</pre>
+
+<script src='https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js'></script>
+<script>
+// Sliding Buttons Examples
+var example = document.getElementById('example');
+
+var setClasses = function(data){
+   example.className = "";
+   example.className = 'box ' + data;
+};
+
+var button_clicked = function(e){
+  var button_data_trigger = this.getAttribute('data-animation');
+  setClasses(button_data_trigger);
+};
+
+
+var setClickEvents = function(){
+  var buttons = document.querySelectorAll('.example-button');
+  for (var i = 0; i < buttons.length; i++) {
+    var button = buttons[i];
+    button.addEventListener('click', button_clicked, false);
+  }    
+}
+
+setClickEvents();
+</script>
+
+</body>
+
+</html>
